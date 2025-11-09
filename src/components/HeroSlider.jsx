@@ -75,7 +75,7 @@ const HeroSlider = () => {
                             />
                             <div className="absolute inset-0 bg-black/40 mix-blend-multiply" />
                             <div className="absolute inset-0 bg-linear-to-b from-black/20 via-black/10 to-transparent" />
-                            <div className="absolute inset-0 z-10 flex items-center justify-center px-4 sm:px-6 lg:px-8 border-2">
+                            <div className="absolute inset-0 z-10 flex items-center justify-center px-4 sm:px-6 lg:px-8">
                                 <div className="text-center">
                                     <h1 className="text-white text-4xl sm:text-6xl font-bold leading-tight tracking-tight [text-shadow:0_2px_6px_rgba(0,0,0,0.5)]">
                                         {item.title}
