@@ -2,6 +2,10 @@ import { createBrowserRouter } from "react-router";
 import RootLayout from "../layouts/RootLayout";
 import Loading from "../components/Loading";
 import AuthLayout from "../layouts/AuthLayout";
+import Login from "../pages/Login";
+import Register from "../pages/Register";
+import ProtectedRoute from "../auth/ProtectedRoute";
+import MyBills from "../pages/MyBills";
 
 const router = createBrowserRouter([
     {
@@ -19,7 +23,11 @@ const router = createBrowserRouter([
             },
             {
                 path: "/my-bills",
-                element: <>My Bills Page</>,
+                element: (
+                    <ProtectedRoute>
+                        <MyBills />
+                    </ProtectedRoute>
+                ),
             },
         ],
     },
@@ -30,11 +38,11 @@ const router = createBrowserRouter([
         children: [
             {
                 path: "login",
-                element: <>Login Page</>,
+                element: <Login />,
             },
             {
                 path: "register",
-                element: <>Register Page</>,
+                element: <Register />,
             },
         ],
     }
