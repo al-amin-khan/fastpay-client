@@ -6,6 +6,7 @@ import Login from "../pages/Login";
 import Register from "../pages/Register";
 import ProtectedRoute from "../auth/ProtectedRoute";
 import MyBills from "../pages/MyBills";
+import Home from "../pages/Home";
 
 const router = createBrowserRouter([
     {
@@ -15,7 +16,7 @@ const router = createBrowserRouter([
         children: [
             {
                 path: "/",
-                element: <>Home Page</>,
+                element: <Home />,
             },
             {
                 path: "/bills",
