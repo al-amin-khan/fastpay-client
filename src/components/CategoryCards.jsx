@@ -25,7 +25,7 @@ const CategoryCards = () => {
                                 <div className="grid place-content-center">
                                     <img className='w-25 h-25' src={icon.icon} alt={icon.label} />
                                 </div>
-                                <div className="text-gray-600 text-2xl font-semibold ">{icon.label}</div>
+                                <div className="text-gray-100 text-2xl font-semibold ">{icon.label}</div>
                             </div>
                         </div>
                     );
