@@ -91,15 +91,17 @@ const Navbar = () => {
                                         <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
                                             <div className="w-10 rounded-full">
                                                 {
-                                                    user ?
+                                                    user && user.photoURL ?
                                                         <img
-                                                            alt={user?.displayName}
-                                                            src={user?.photoURL}
+                                                            alt={user.displayName}
+                                                            src={user.photoURL}
                                                             className="w-10"
                                                             referrerPolicy="no-referrer"
                                                         />
                                                         :
-                                                        <FaRegCircleUser />
+                                                        <div className="flex justify-center items-center rounded-full h-10 w-10 overflow-hidden">
+                                                            <FaRegCircleUser size={30} color='#3fa743' />
+                                                        </div>
                                                 }
                                             </div>
                                         </div>
