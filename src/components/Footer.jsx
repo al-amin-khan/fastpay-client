@@ -122,7 +122,7 @@ const Footer = () => {
                             <p className="text-gray-400 mb-4 text-sm">
                                 Subscribe to get updates on new features, payment reminders, and exclusive offers.
                             </p>
-                            <div className="flex gap-2">
+                            <div className="flex flex-col md:flex-row lg:flex-row gap-2">
                                 <input
                                     type="email"
                                     placeholder="Enter your email"

@@ -14,13 +14,13 @@ const CategoryCards = () => {
     return (
         <div className='w-full md:w-11/12 lg:w-11/12 mx-auto py-15'>
             <div className='pb-10 text-center'>
-                <div className="text-3xl md:text-4xl lg:text-4xl font-bold text-gray-800">Pay Your Bills</div>
-                <div className="text-2xl md:text-3xl lg:text-2xl font-semibold text-gray-600">Fast, secure, and easy</div>
+                <div className="text-3xl md:text-3xl lg:text-3xl font-bold text-gray-800">Pay Your Bills</div>
+                <div className="text-lg md:text-2xl lg:text-lg font-semibold text-gray-600">Fast, secure, and easy</div>
             </div>
-            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 justify-items-center">
+            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 justify-items-center gap-4 md:gap-8 lg:gap-8">
                 {categoryIcons.map((icon, index) => {
                     return (
-                        <div key={index} className="shadow-lg h-35 w-35 md:h-50 lg:h-50 md:w-50 lg:w-50 bg-white transition-all transform hover:scale-110 active:scale-95 flex justify-center items-center bg-linear-to-br from-emerald-500 to-cyan-500 rounded-md p-5 text-center">
+                        <div key={index} className="shadow-lg h-40 w-40 md:h-50 lg:h-50 md:w-50 lg:w-50 bg-white transition-all transform hover:scale-110 active:scale-95 flex justify-center items-center bg-linear-to-br from-emerald-500 to-cyan-500 rounded-md text-center">
                             <div className="space-y-2.5">
                                 <div className="grid place-content-center">
                                     <img className='w-25 h-25' src={icon.icon} alt={icon.label} />
