@@ -8,6 +8,7 @@ import ProtectedRoute from "../auth/ProtectedRoute";
 import MyBills from "../pages/MyBills";
 import Home from "../pages/Home";
 import BillDetail from "../pages/BillDetail";
+import AllBills from "../pages/AllBills";
 
 const router = createBrowserRouter([
     {
@@ -21,7 +22,7 @@ const router = createBrowserRouter([
             },
             {
                 path: "/bills",
-                element: <>Bills Page</>,
+                element: <AllBills />,
             },
             {
                 path: "/bills/:id",
