@@ -79,7 +79,7 @@ const LatestBills = () => {
 
                                     <div className="space-y-3">
                                         <div className="flex items-start text-gray-600">
-                                            <MapPin className="w-4 h-4 mr-2 mt-0.5 flex-shrink-0" />
+                                            <MapPin className="w-4 h-4 mr-2 mt-0.5 shrink-0" />
                                             <span className="text-sm">{bill.location}</span>
                                         </div>
 
