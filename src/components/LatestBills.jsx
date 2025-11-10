@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import useAxiosPublic from "../hooks/useAxiosPublic";
 import Loading from "./Loading";
+import { Link } from "react-router";
 
 const LatestBills = () => {
     const axiosPublic = useAxiosPublic();
@@ -14,8 +15,10 @@ const LatestBills = () => {
             async () => {
                 try {
                     setLoading(true);
-                    const res = await axiosPublic.get('/latest-bills')
-                    console.log(res.data);
+                    const res = await axiosPublic.get('/latest-bills');
+                    if (res.status !== 200) {
+                        throw new Error(res.message);
+                    }
                     setLatestBills(res.data);
                 } catch (error) {
                     console.log(error);
@@ -25,10 +28,10 @@ const LatestBills = () => {
             }
         )();
 
-    }, [axiosPublic]);
+    }, [axiosPublic, setLatestBills]);
 
-    if (loading) return <Loading />;        
-    
+    if (loading) return <Loading />;
+
 
     const getCategoryIcon = (category) => {
         const icons = {
@@ -49,10 +52,10 @@ const LatestBills = () => {
     return (
         <div>
             <div className="min-h-screen bg-gray-50 p-8">
-                <div className="max-w-7xl mx-auto">
+                <div className="max-w-7xl w-11/12 mx-auto">
                     <div className="mb-8 text-center">
-                        <h1 className="text-3xl font-bold text-gray-900 mb-2">Utility Bills</h1>
-                        <p className="text-gray-600">Manage your monthly expenses</p>
+                        <h1 className="text-3xl font-bold text-gray-900 mb-2">Latest Bills</h1>
+                        <p className="text-gray-600 font-semibold">Check out the latest bills</p>
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -90,10 +93,15 @@ const LatestBills = () => {
                                     </div>
 
                                     <div className="mt-6 pt-4 border-t border-gray-200">
-                                        <button className="w-full py-2.5 px-4 bg-gray-900 text-white rounded-lg font-medium text-sm hover:bg-gray-800 transition-colors duration-200 flex items-center justify-center group">
-                                            <span>View Details</span>
-                                            <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform duration-200" />
-                                        </button>
+                                        <Link
+                                            to={`/bills/${bill._id}`}
+                                            className="group"
+                                        >
+                                            <button className="w-full py-2.5 px-4 bg-gray-900 text-white rounded-lg font-medium text-sm hover:bg-gray-800 transition-colors duration-200 flex items-center justify-center group">
+                                                <span>View Details</span>
+                                                <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform duration-200" />
+                                            </button>
+                                        </Link>
                                     </div>
                                 </div>
                             );
