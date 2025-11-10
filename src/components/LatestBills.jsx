@@ -2,7 +2,6 @@ import { useEffect } from "react";
 import { useState } from "react";
 import useAxiosPublic from "../hooks/useAxiosPublic";
 import Loading from "./Loading";
-import { Link } from "react-router";
 import BillCard from "./BillCard";
 
 const LatestBills = () => {
