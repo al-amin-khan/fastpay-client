@@ -7,13 +7,16 @@ const AllBills = () => {
     const axiosPublic = useAxiosPublic();
     const [bills, setBills] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [categories, setCategories] = useState([]);
+    const [selectedCategory, setSelectedCategory] = useState('');
+
 
     useEffect(() => {
         (
             async () => {
                 try {
                     setLoading(true);
-                    const res = await axiosPublic.get('/bills');
+                    const res = await axiosPublic.get(`/bills?category=${selectedCategory}`);
                     if (res.status !== 200) {
                         throw new Error(res.message);
                     }
@@ -26,12 +29,40 @@ const AllBills = () => {
             }
         )();
 
+    }, [selectedCategory, axiosPublic]);
+
+    useEffect(() => {
+        (
+            async () => {
+                try {
+                    setLoading(true);
+                    const res = await axiosPublic.get('/bills/category');
+                    if (res.status !== 200) {
+                        throw new Error(res.message);
+                    }
+                    setCategories(res.data.categories);
+                } catch (error) {
+                    console.log(error);
+                } finally {
+                    setLoading(false);
+                }
+            }
+        )();
+
     }, [axiosPublic]);
+
+    useEffect(() => {
+        console.log('The category is now:', selectedCategory);
+    }, [selectedCategory]);
+
 
     if (loading) return <Loading />;
 
-    console.log({bills});
-    
+    const handleCategoryChange = (e) => {
+        e.preventDefault();
+        setSelectedCategory(e.target.value);
+    }
+
 
     return (
         <div>
@@ -40,6 +71,24 @@ const AllBills = () => {
                     <div className="mb-8 text-center">
                         <h1 className="text-3xl font-bold text-gray-900 mb-2">All Bills In One Place</h1>
                         <p className="text-gray-600 font-semibold"> Track, manage, and pay all your bills in one place</p>
+                    </div>
+
+                    <div className='text-end py-3'>
+                        <select
+                            onChange={handleCategoryChange}
+                            value={selectedCategory}
+                            className="select"
+                        >
+                            <option disabled={true} value="">Pick a Category</option>
+                            <option value="">All</option>
+                            {
+                                categories.map((category, index) => {
+                                    return (
+                                        <option key={index} value={category}>{category}</option>
+                                    );
+                                })
+                            }
+                        </select>
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
