@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import useAxiosPublic from '../hooks/useAxiosPublic';
 import Loading from '../components/Loading';
-import BillCard from '../components/BillCard';
+import AllBillCard from '../components/AllBillCard';
 
 const AllBills = () => {
     const axiosPublic = useAxiosPublic();
@@ -30,6 +30,9 @@ const AllBills = () => {
 
     if (loading) return <Loading />;
 
+    console.log({bills});
+    
+
     return (
         <div>
             <div className="min-h-screen bg-gray-50 p-8">
@@ -42,7 +45,7 @@ const AllBills = () => {
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                         {bills.map((bill) => {
                             return (
-                                <BillCard key={bill._id} bill={bill} />
+                                <AllBillCard key={bill._id} bill={bill} />
                             );
                         })}
                     </div>
