@@ -70,7 +70,7 @@ const Register = () => {
                     displayName: name,
                     photoURL: photoURL,
                 }).then(() => {
-                    console.log('User profile updated successfully');
+                    toast.success('User profile updated successfully');
                     setUser(createdUser);
                 }).catch((error) => {
                     toast.error(`Error updating profile: ${error.message}`, {
