@@ -5,6 +5,9 @@ import Loading from "../components/Loading";
 import { SquarePen, Trash } from "lucide-react";
 import { Link } from "react-router";
 import Swal from "sweetalert2";
+import jsPDF from "jspdf";
+import { autoTable } from 'jspdf-autotable';
+import { format } from "date-fns";
 
 const MyBills = () => {
     const axiosPublic = useAxiosPublic();
@@ -116,7 +119,7 @@ const MyBills = () => {
             if (result.isConfirmed) {
                 try {
                     setIsSubmitting(true);
-                    const res =await axiosPublic.delete(`/my-bills/${bill}`);
+                    const res = await axiosPublic.delete(`/my-bills/${bill}`);
                     if (res.data.deletedCount !== 1) {
                         throw new Error(res.message);
                     }
@@ -138,8 +141,61 @@ const MyBills = () => {
         });
     }
 
+
+    const generateAllBillsPDFReport = async () => {
+        const doc = new jsPDF(
+            {
+                orientation: "portrait",   // or "landscape"
+                unit: "mm",                 // "mm" | "pt" | "cm" | "in" | "px"
+                format: "a4"                // A4 paper
+            }
+        );
+        const pageWidth = doc.internal.pageSize.getWidth();
+
+        const monthYear = format(new Date(), 'MMMM yyyy');
+
+
+
+        const title = `FastPay \n All Bills Report - ${monthYear}`;
+        const subtitle = `Account: ${user.displayName} | ${user.email}`;
+
+        // Title
+        doc.setFont("helvetica", "bold");
+        doc.setFontSize(16);
+        doc.text(title, pageWidth / 2, 16, { align: "center" });
+
+        doc.setFont("helvetica", "normal");
+        doc.setFontSize(11);
+        doc.setTextColor(100);
+        doc.text(subtitle, pageWidth / 2, 30, { align: "center" });
+
+        autoTable(doc, {
+            title: "All Bills Report",
+            head: [
+                ["Bill", "Name", "Email", "Amount", "Address", "Phone", "Date"],
+            ],
+            body: myBills.map((bill, index) => [
+                index + 1,
+                bill.username,
+                bill.email,
+                bill.amount,
+                bill.address,
+                bill.phone,
+                (bill.date).split("T")[0],
+            ]),
+            startY: 35,
+            theme: 'striped',
+        });
+
+        doc.save("all-bills.pdf");
+    }
+
+
     return (
         <div>
+            <div className="text-end">
+                <button className="btn btn-soft mr-4 mt-2" onClick={generateAllBillsPDFReport}>Generate PDF</button>
+            </div>
             <div className="overflow-x-auto w-11/12 mx-auto">
                 <table className="table">
                     {/* head */}
