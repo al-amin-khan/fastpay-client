@@ -83,7 +83,7 @@ const HeroSlider = () => {
                                             {item.title}
                                         </h1>
                                     </Slide>
-                                    <Fade delay={500} duration={2000} fraction={0.5} triggerOnce >
+                                    <Fade delay={500} duration={2000} fraction={0.8} triggerOnce >
                                         <p className="mt-4 sm:mt-6 text-white text-lg sm:text-xl leading-relaxed [text-shadow:0_1px_3px_rgba(0,0,0,0.45)]">
                                             {item.subtitle}
                                         </p>
