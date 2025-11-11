@@ -72,8 +72,15 @@ const BillDetail = () => {
                     icon: "success",
                     title: "Your bill has been paid successfully",
                     showConfirmButton: false,
-                    timer: 1500
+                    timer: 2000
                 });
+
+                const updatedBillStatus = await axiosPublic.patch(`/bills/${id}`, { status: 'paid', date: new Date() });
+
+                if (updatedBillStatus.status !== 200) {
+                    throw new Error(updatedBillStatus.message);
+                }
+
                 modalRef.current?.close();
             } else {
                 throw new Error(res?.data?.message || 'Payment failed');
