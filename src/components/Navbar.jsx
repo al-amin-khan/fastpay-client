@@ -4,6 +4,8 @@ import Loading from './Loading';
 import toast from 'react-hot-toast';
 import fastPayLogo from '../assets/fastpay.png';
 import { FaRegCircleUser } from 'react-icons/fa6';
+import useTheme from '../hooks/useTheme';
+import { Moon, Sun } from 'lucide-react';
 
 const Navbar = () => {
     const navItems = [
@@ -13,6 +15,7 @@ const Navbar = () => {
     ]
 
     const { loading, user, logOut } = useAuth();
+    const { theme, toggle } = useTheme();
 
     const location = useLocation();
     const isLoginPage = location.pathname === '/auth/login';
@@ -123,6 +126,17 @@ const Navbar = () => {
                                         </>
                                     )
                     }
+                    {/* theme toggle*/}
+                    <button
+                        aria-label="Toggle theme"
+                        onClick={toggle}
+                        className={`btn btn-ghost btn-sm ${theme === "light" ? "text-gray-600" : "bg-gray-800"}`}
+                    >
+                        {theme === "light" ? <Sun size={22} className="text-amber-600" /> : <Moon size={22} className="text-yellow-400" />}
+                        <span className="ml-1 hidden sm:inline">
+                            {theme === "light" ? "Light" : "Dark"}
+                        </span>
+                    </button>
                 </div>
             </div>
         </div>
