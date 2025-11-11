@@ -1,16 +1,91 @@
-import React, { useState } from 'react';
+import React, { useMemo, useRef, useState } from 'react';
 import { Link, useParams } from 'react-router';
 import Loading from '../components/Loading';
 import useAxiosPublic from '../hooks/useAxiosPublic';
 import { useEffect } from 'react';
 import { ArrowLeft, Bolt, Calendar, Droplet, Flame, MapPin, Wifi, Zap } from 'lucide-react';
+import useAuth from '../hooks/useAuth';
+import Swal from 'sweetalert2';
 
 const BillDetail = () => {
     const { id } = useParams();
+    const { user } = useAuth();
     const axiosPublic = useAxiosPublic();
 
     const [bill, setBill] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [isSubmitting, setIsSubmitting] = useState(false);
+
+    const modalRef = useRef(null);
+
+    const handleModal = (e) => {
+        e.preventDefault();
+        modalRef.current.showModal();
+    };
+
+    const handlePayBill = async(e) => {
+        e.preventDefault();
+
+        if (!user?.email) {
+            Swal.fire({ icon: 'error', title: 'Please log in to pay.' });
+            return;
+        }
+
+        if (!bill) return;
+
+
+        const billId = e.target.billId.value;
+        const accountNumber = e.target.accountNumber.value;
+        const amount = e.target.amount.value;
+        const billingMonth = e.target.billingMonth.value;
+        const username = e.target.username.value;
+        const phone = e.target.phone.value;
+        const address = e.target.address.value;
+
+        const payload = {
+            username,
+            email: user.email,
+            billId,
+            accountNumber,
+            amount,
+            billingMonth,
+            phone,
+            address,
+            date: new Date(),
+        };
+
+        console.log(payload);
+        
+
+        try {
+            setIsSubmitting(true);
+
+            const res = await axiosPublic.post('/my-bills', payload);
+
+            if (res.status !== 200) {
+                throw new Error(res.message);
+            }
+
+            if (res.data.insertedId) {
+                Swal.fire({
+                    position: "center",
+                    icon: "success",
+                    title: "Your bill has been paid successfully",
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+                modalRef.current?.close();
+            } else {
+                throw new Error(res?.data?.message || 'Payment failed');
+            }
+        } catch (error) {
+            console.log(error);
+            Swal.fire({ icon: 'error', title: 'Payment failed', text: error.message });
+        } finally {
+            setIsSubmitting(false);
+        }
+    }
+
 
     useEffect(() => {
         (
@@ -60,6 +135,23 @@ const BillDetail = () => {
             year: 'numeric'
         });
     };
+
+    const isCurrentMonthBill = useMemo(() => {
+        if (!bill?.date) return false;
+        const today = new Date();
+        const billDate = new Date(bill.date);
+        return (
+            today.getMonth() === billDate.getMonth() &&
+            today.getFullYear() === billDate.getFullYear()
+        );
+    }, [bill]);
+
+    const handlePayBillModal = (e) => {
+        e.preventDefault();
+        const form = e.target;
+        const amount = form.amount.value;
+        console.log(amount)
+    }
 
     if (loading) return <Loading />;
 
@@ -169,8 +261,10 @@ const BillDetail = () => {
 
                         {/* Action Buttons */}
                         <div className="flex gap-4 mt-8 pt-6 border-t border-gray-200">
-                            <button className="flex-1 py-3 px-6 bg-gray-900 text-white rounded-lg font-medium hover:bg-gray-800 transition-colors duration-200">
-                                Pay Bill Now
+                            <button onClick={handleModal} className={`flex-1 py-3 px-6 bg-gray-900 text-white rounded-lg font-medium hover:bg-gray-800 transition-colors duration-200 hover:cursor-pointer ${!isCurrentMonthBill ? "opacity-50 cursor-not-allowed bg-gray-500" : ""}`} disabled={!isCurrentMonthBill}>
+                                {
+                                    isCurrentMonthBill ? "Pay Now" : "Only current month bill can be paid"
+                                }
                             </button>
                             <button className="flex-1 py-3 px-6 bg-gray-100 text-gray-900 rounded-lg font-medium hover:bg-gray-200 transition-colors duration-200">
                                 Download Receipt
@@ -179,6 +273,49 @@ const BillDetail = () => {
                     </div>
                 </div>
             </div>
+
+            {/* modal */}
+            <dialog ref={modalRef} className="modal modal-bottom sm:modal-middle">
+                <div className="modal-box">
+                    <h3 className="font-bold text-lg text-center mb-4">Pay Bill</h3>
+                    <form onSubmit={handlePayBill} >
+                        <fieldset className="fieldset">
+                            <label className="label">Bill ID</label>
+                            <input type="text" name='billId' className="input w-full text-gray-800" placeholder="Bill ID" readOnly value={bill._id} disabled />
+
+                            <label className="label">Account Number</label>
+                            <input type="text" name='accountNumber' className="input w-full text-gray-800" placeholder="Account Number" readOnly value={bill.accountNumber} disabled />
+
+                            <label className="label">Amount</label>
+                            <input type="text" name='amount' className="input w-full text-gray-800" placeholder="Bill ID" readOnly value={bill.amount} disabled />
+
+                            <label className="label">Billing Month</label>
+                            <input type="text" name='billingMonth' className="input w-full text-gray-800" placeholder="Bill ID" readOnly value={new Date(bill.date).toLocaleString('default', { month: 'long', year: 'numeric' })} disabled />
+
+                            <label className="label">Username</label>
+                            <input type="text" name='username' className="input w-full text-gray-800" placeholder="Account Number" defaultValue={user.displayName} />
+
+                            <label className="label">Phone</label>
+                            <input type="text" name='phone' className="input w-full text-gray-800" placeholder="Phone Number" />
+
+                            <label className="label">Address</label>
+                            <input type="text" name='address' className="input w-full text-gray-800" placeholder="Address" />
+
+                            {
+                                isSubmitting ?
+                                    <button type="submit" className="btn loading" disabled>Paying...</button>
+                                    :
+                                    <button className="btn btn-neutral mt-4">Pay Now</button>
+                            }
+                        </fieldset>
+                    </form>
+                    <div className="modal-action">
+                        <form method="dialog" onSubmit={handlePayBillModal}>
+                            <button className="btn">Close</button>
+                        </form>
+                    </div>
+                </div>
+            </dialog>
         </div>
     );
 };
