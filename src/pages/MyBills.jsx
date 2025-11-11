@@ -109,6 +109,39 @@ const MyBills = () => {
 
     const handleDeleteBill = (bill) => {
         console.log(bill);
+        Swal.fire({
+            title: "Are you sure?",
+            text: "you want to delete this bill? You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!",
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                try {
+                    setIsSubmitting(true);
+                    const res =await axiosPublic.delete(`/my-bills/${bill}`);
+                    console.log(res);
+                    if (res.data.deletedCount !== 1) {
+                        throw new Error(res.message);
+                    }
+                    Swal.fire({
+                        title: "Deleted!",
+                        text: "Your bill has been deleted.",
+                        icon: "success",
+                        showConfirmButton: false,
+                        timer: 2000
+                    });
+                    setRefetch(!refetch);
+                } catch (error) {
+                    Swal.fire({ icon: 'error', title: 'Delete failed', text: error.message });
+                } finally {
+                    setIsSubmitting(false);
+                }
+
+            }
+        });
     }
 
     return (
