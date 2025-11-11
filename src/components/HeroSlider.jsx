@@ -9,6 +9,7 @@ import realTimeUsage from '../assets/slider/real-time-usage.jpg';
 import multiAccount from '../assets/slider/multi-accout.jpg';
 import smartReminder from '../assets/slider/smart-reminder.jpg';
 import rewards from '../assets/slider/rewards.jpg';
+import { Fade, Slide } from 'react-awesome-reveal';
 
 
 const HeroSlider = () => {
@@ -77,12 +78,16 @@ const HeroSlider = () => {
                             <div className="absolute inset-0 bg-linear-to-b from-black/20 via-black/10 to-transparent" />
                             <div className="absolute inset-0 z-10 flex items-center justify-center px-4 sm:px-6 lg:px-8">
                                 <div className="text-center">
-                                    <h1 className="text-white text-4xl sm:text-6xl font-bold leading-tight tracking-tight [text-shadow:0_2px_6px_rgba(0,0,0,0.5)]">
-                                        {item.title}
-                                    </h1>
-                                    <p className="mt-4 sm:mt-6 text-white text-lg sm:text-xl leading-relaxed [text-shadow:0_1px_3px_rgba(0,0,0,0.45)]">
-                                        {item.subtitle}
-                                    </p>
+                                    <Slide direction="right">
+                                        <h1 className="text-white text-4xl sm:text-6xl font-bold leading-tight tracking-tight [text-shadow:0_2px_6px_rgba(0,0,0,0.5)]">
+                                            {item.title}
+                                        </h1>
+                                    </Slide>
+                                    <Fade delay={500} duration={2000} fraction={0.5} triggerOnce >
+                                        <p className="mt-4 sm:mt-6 text-white text-lg sm:text-xl leading-relaxed [text-shadow:0_1px_3px_rgba(0,0,0,0.45)]">
+                                            {item.subtitle}
+                                        </p>
+                                    </Fade>
                                 </div>
                             </div>
                         </SwiperSlide>
