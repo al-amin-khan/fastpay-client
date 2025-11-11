@@ -53,7 +53,6 @@ const MyBills = () => {
     const totalBill = myBills.reduce((total, bill) => total + Number(bill.amount), 0);
 
     const handleUpdateModal = (bill) => {
-        console.log(bill);
         setSelectedBill(bill);
         billUpdateModalRef.current.showModal();
     }
@@ -72,8 +71,6 @@ const MyBills = () => {
             address: e.target.address.value,
             updatedAt: new Date(),
         }
-
-        console.log('updated payload:', payload);
 
         try {
             setIsSubmitting(true);
@@ -100,7 +97,6 @@ const MyBills = () => {
             }
 
         } catch (error) {
-            console.log(error);
             Swal.fire({ icon: 'error', title: 'Update failed', text: error.message });
         } finally {
             setIsSubmitting(false);
@@ -108,7 +104,6 @@ const MyBills = () => {
     }
 
     const handleDeleteBill = (bill) => {
-        console.log(bill);
         Swal.fire({
             title: "Are you sure?",
             text: "you want to delete this bill? You won't be able to revert this!",
@@ -122,7 +117,6 @@ const MyBills = () => {
                 try {
                     setIsSubmitting(true);
                     const res =await axiosPublic.delete(`/my-bills/${bill}`);
-                    console.log(res);
                     if (res.data.deletedCount !== 1) {
                         throw new Error(res.message);
                     }

@@ -66,7 +66,6 @@ const Register = () => {
         createUser(email, password)
             .then((res) => {
                 const createdUser = res.user;
-                console.log(createdUser);
                 updateUserProfile({
                     displayName: name,
                     photoURL: photoURL,
@@ -74,7 +73,6 @@ const Register = () => {
                     console.log('User profile updated successfully');
                     setUser(createdUser);
                 }).catch((error) => {
-                    console.log('Error updating user profile:', error);
                     toast.error(`Error updating profile: ${error.message}`, {
                         duration: 4000,
                         position: 'bottom-left',
