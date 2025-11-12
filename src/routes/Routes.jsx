@@ -9,15 +9,17 @@ import MyBills from "../pages/MyBills";
 import Home from "../pages/Home";
 import BillDetail from "../pages/BillDetail";
 import AllBills from "../pages/AllBills";
+import PageNotFound from "../components/PageNotFound";
 
 const router = createBrowserRouter([
     {
         path: "/",
         hydrateFallbackElement: <Loading />,
         element: <RootLayout />,
+        errorElement: <PageNotFound />,
         children: [
             {
-                path: "/",
+                index: true,
                 element: <Home />,
             },
             {
@@ -40,6 +42,10 @@ const router = createBrowserRouter([
                     </ProtectedRoute>
                 ),
             },
+            {
+                path: "*",
+                element: <PageNotFound />,
+            }
         ],
     },
     {
@@ -55,7 +61,15 @@ const router = createBrowserRouter([
                 path: "register",
                 element: <Register />,
             },
+            {
+                path: "*",
+                element: <PageNotFound />,
+            }
         ],
+    },
+    {
+        path: "*",
+        element: <PageNotFound />,
     }
 ]);
 

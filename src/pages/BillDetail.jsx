@@ -1,11 +1,12 @@
 import React, { useMemo, useRef, useState } from 'react';
-import { Link, useParams } from 'react-router';
 import Loading from '../components/Loading';
 import useAxiosPublic from '../hooks/useAxiosPublic';
 import { useEffect } from 'react';
 import { ArrowLeft, Bolt, Calendar, Droplet, Flame, MapPin, Wifi, Zap } from 'lucide-react';
 import useAuth from '../hooks/useAuth';
 import Swal from 'sweetalert2';
+import { Link, useParams } from 'react-router';
+import PageNotFound from '../components/PageNotFound';
 
 const BillDetail = () => {
     const { id } = useParams();
@@ -165,13 +166,8 @@ const BillDetail = () => {
 
     if (!bill) {
         return (
-            <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-                <div className="text-center">
-                    <p className="text-xl text-gray-600">Bill not found</p>
-                    <Link to="/bills" className="text-blue-600 hover:underline mt-4 inline-block">
-                        Back to all bills
-                    </Link>
-                </div>
+            <div className="">
+                <PageNotFound />
             </div>
         );
     }

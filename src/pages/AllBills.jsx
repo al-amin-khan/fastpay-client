@@ -29,7 +29,7 @@ const AllBills = () => {
             }
         )();
 
-    }, [selectedCategory, axiosPublic]);
+    }, [selectedCategory]);
 
     useEffect(() => {
         (
@@ -49,11 +49,7 @@ const AllBills = () => {
             }
         )();
 
-    }, [axiosPublic]);
-
-    useEffect(() => {
-        console.log('The category is now:', selectedCategory);
-    }, [selectedCategory]);
+    }, []);
 
 
     if (loading) return <Loading />;
