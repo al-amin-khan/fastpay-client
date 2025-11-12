@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useLocation } from 'react-router';
 import toast from 'react-hot-toast';
 import useAuth from '../hooks/useAuth';
+import useHelmet from '../hooks/useHelmet';
 
 const ResetPassword = () => {
     const HelmetTags = useHelmet({
