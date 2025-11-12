@@ -4,6 +4,11 @@ import toast from 'react-hot-toast';
 import useAuth from '../hooks/useAuth';
 
 const ResetPassword = () => {
+    const HelmetTags = useHelmet({
+        title: 'Reset Password',
+        description: 'Pay and manage your utility bills in one place.',
+    });
+
     const { resetPassword } = useAuth();
 
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -48,22 +53,25 @@ const ResetPassword = () => {
 
 
     return (
-        <div className="hero bg-base-200 min-h-[90vh]">
-            <div className="hero-content w-full md:w-3/4 lg:w-3/4">
-                <div className="card bg-base-100 w-full max-w-sm shadow-2xl">
-                    <div className="card-body">
-                        <div className='text-center text-3xl font-bold text-gray-800'>Reset Password</div>
-                        <form onSubmit={handleResetPassword}>
-                            <fieldset className="fieldset">
-                                <label className="label">Email</label>
-                                <input defaultValue={emailRef} type="email" name='email' className="input w-full" placeholder="Email" required />
-                                <button className={`btn mt-4 ${isSubmitting ? 'bg-gray-400 text-white cursor-not-allowed' : 'btn-neutral'}`} disabled={isSubmitting}>Reset</button>
-                            </fieldset>
-                        </form>
+        <>
+            <HelmetTags />
+            <div className="hero bg-base-200 min-h-[90vh]">
+                <div className="hero-content w-full md:w-3/4 lg:w-3/4">
+                    <div className="card bg-base-100 w-full max-w-sm shadow-2xl">
+                        <div className="card-body">
+                            <div className='text-center text-3xl font-bold text-gray-800'>Reset Password</div>
+                            <form onSubmit={handleResetPassword}>
+                                <fieldset className="fieldset">
+                                    <label className="label">Email</label>
+                                    <input defaultValue={emailRef} type="email" name='email' className="input w-full" placeholder="Email" required />
+                                    <button className={`btn mt-4 ${isSubmitting ? 'bg-gray-400 text-white cursor-not-allowed' : 'btn-neutral'}`} disabled={isSubmitting}>Reset</button>
+                                </fieldset>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </>
     );
 };
 
