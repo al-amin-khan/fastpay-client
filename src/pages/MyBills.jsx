@@ -8,8 +8,15 @@ import Swal from "sweetalert2";
 import jsPDF from "jspdf";
 import { autoTable } from 'jspdf-autotable';
 import { format } from "date-fns";
+import useHelmet from "../hooks/useHelmet";
 
 const MyBills = () => {
+
+    const HelmetTags = useHelmet({
+        title: 'My Bills',
+        description: 'Pay and manage your utility bills in one place.',
+    });
+
     const axiosPublic = useAxiosPublic();
     const { user } = useAuth();
     const [myBills, setMyBills] = useState([]);
@@ -193,6 +200,7 @@ const MyBills = () => {
 
     return (
         <div>
+            <HelmetTags />
             <div className="text-end">
                 <button className="btn btn-soft mr-4 mt-2" onClick={generateAllBillsPDFReport}>Generate PDF</button>
             </div>

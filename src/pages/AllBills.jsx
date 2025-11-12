@@ -2,8 +2,14 @@ import React, { useEffect, useState } from 'react';
 import useAxiosPublic from '../hooks/useAxiosPublic';
 import Loading from '../components/Loading';
 import AllBillCard from '../components/AllBillCard';
+import useHelmet from '../hooks/useHelmet';
 
 const AllBills = () => {
+    const HelmetTags = useHelmet({
+        title: 'Bills',
+        description: 'Pay and manage your utility bills in one place.',
+    });
+
     const axiosPublic = useAxiosPublic();
     const [bills, setBills] = useState([]);
     const [loading, setLoading] = useState(true);
