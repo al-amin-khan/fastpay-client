@@ -52,7 +52,7 @@ const Navbar = () => {
                     </div>
                     <ul
                         tabIndex="-1"
-                        className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow font-semibold">
+                        className="menu menu-sm dropdown-content bg-base-100 rounded-box z-99999 mt-3 w-52 p-2 px-1 shadow font-semibold">
                         {
                             visibleNavItems.map(item => (
                                 <li key={item.id}>
@@ -67,7 +67,7 @@ const Navbar = () => {
                     </ul>
                 </div>
                 <Link to="/" className="btn btn-ghost text-xl">
-                    <img src={fastPayLogo} alt="fastPay Logo" className="h-10 md:h-12 lg:h-12" />
+                    <img src={fastPayLogo} alt="fastPay Logo" className="ml-1.5 md:ml-0 lg:ml-0 h-10 md:h-12 lg:h-12" />
                 </Link>
             </div>
             <div className="navbar-end hidden lg:flex">

@@ -19,6 +19,7 @@ const MyBills = () => {
 
     const axiosPublic = useAxiosPublic();
     const { user } = useAuth();
+    const userEmail = user?.email;
     const [myBills, setMyBills] = useState([]);
     const [selectedBill, setSelectedBill] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -29,12 +30,12 @@ const MyBills = () => {
     const billUpdateModalRef = useRef(null);
 
     useEffect(() => {
-        if (!user?.email) return;
+        if (!userEmail) return;
         (
             async () => {
                 try {
                     setLoading(true);
-                    const res = await axiosPublic.get(`/my-bills?email=${user.email}`);
+                    const res = await axiosPublic.get(`/my-bills?email=${userEmail}`);
 
                     if (res.status !== 200) {
                         throw new Error(res.message);
@@ -47,11 +48,11 @@ const MyBills = () => {
                 }
             }
         )();
-    }, [refetch, user.email, axiosPublic]);
+    }, [refetch, userEmail, axiosPublic]);
 
     if (loading) return <Loading />;
 
-    if (!user && !user.email) {
+    if (!userEmail) {
         return (
             <div className="flex items-center justify-center h-screen">
                 <p className="text-2xl font-semibold">Please log in to see your bills.</p>
@@ -76,7 +77,7 @@ const MyBills = () => {
             amount: e.target.amount.value,
             billingMonth: e.target.billingMonth.value,
             username: e.target.username.value,
-            email: user?.email,
+            email: userEmail,
             phone: e.target.phone.value,
             address: e.target.address.value,
             updatedAt: new Date(),
@@ -164,7 +165,7 @@ const MyBills = () => {
 
 
         const title = `FastPay \n All Bills Report - ${monthYear}`;
-        const subtitle = `Account: ${user.displayName} | ${user.email}`;
+        const subtitle = `Account: ${user?.displayName || 'User'} | ${userEmail}`;
 
         // Title
         doc.setFont("helvetica", "bold");
