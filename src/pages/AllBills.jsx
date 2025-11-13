@@ -12,7 +12,8 @@ const AllBills = () => {
 
     const axiosPublic = useAxiosPublic();
     const [bills, setBills] = useState([]);
-    const [loading, setLoading] = useState(true);
+    const [billsLoading, setBillsLoading] = useState(true);
+    const [categoryLoading, setCategoryLoading] = useState(true);
     const [error, setError] = useState(null);
     const [categories, setCategories] = useState([]);
     const [selectedCategory, setSelectedCategory] = useState('');
@@ -22,7 +23,7 @@ const AllBills = () => {
         (
             async () => {
                 try {
-                    setLoading(true);
+                    setCategoryLoading(true);
                     const res = await axiosPublic.get('/bills/category');
                     if (res.status !== 200) {
                         throw new Error(res.message);
@@ -32,19 +33,19 @@ const AllBills = () => {
                     console.log(error);
                     setError(error);
                 } finally {
-                    setLoading(false);
+                    setCategoryLoading(false);
                 }
             }
         )();
 
-    }, [axiosPublic, setCategories]);
+    }, [setCategories, axiosPublic]);
 
 
     useEffect(() => {
         (
             async () => {
                 try {
-                    setLoading(true);
+                    setBillsLoading(true);
                     const res = await axiosPublic.get(`/bills?category=${selectedCategory}`);
                     if (res.status !== 200) {
                         throw new Error(res.message);
@@ -54,15 +55,15 @@ const AllBills = () => {
                     console.log(error);
                     setError(error);
                 } finally {
-                    setLoading(false);
+                    setBillsLoading(false);
                 }
             }
         )();
 
-    }, [selectedCategory]);
+    }, [selectedCategory, axiosPublic]);
 
 
-    if (loading) return <Loading />;
+    if (categoryLoading || billsLoading) return <Loading />;
 
     const handleCategoryChange = (e) => {
         e.preventDefault();
