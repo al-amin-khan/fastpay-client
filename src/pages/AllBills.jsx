@@ -17,7 +17,7 @@ const AllBills = () => {
     const [billsError, setBillsError] = useState(null);
     const [categoryError, setCategoryError] = useState(null);
     const [categories, setCategories] = useState([]);
-    const [selectedCategory, setSelectedCategory] = useState('');
+    const [selectedCategory, setSelectedCategory] = useState('all');
 
 
     useEffect(() => {
@@ -99,7 +99,7 @@ const AllBills = () => {
                                     className="select"
                                     disabled={billsLoading}
                                 >
-                                    <option value="">All Categories</option>
+                                    <option value="all">All Categories</option>
                                     {categories.map((category, index) => (
                                         <option key={index} value={category}>
                                             {category}
