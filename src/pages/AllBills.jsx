@@ -23,27 +23,6 @@ const AllBills = () => {
             async () => {
                 try {
                     setLoading(true);
-                    const res = await axiosPublic.get(`/bills?category=${selectedCategory}`);
-                    if (res.status !== 200) {
-                        throw new Error(res.message);
-                    }
-                    setBills(res.data);
-                } catch (error) {
-                    console.log(error);
-                    setError(error);
-                } finally {
-                    setLoading(false);
-                }
-            }
-        )();
-
-    }, [selectedCategory]);
-
-    useEffect(() => {
-        (
-            async () => {
-                try {
-                    setLoading(true);
                     const res = await axiosPublic.get('/bills/category');
                     if (res.status !== 200) {
                         throw new Error(res.message);
@@ -59,6 +38,28 @@ const AllBills = () => {
         )();
 
     }, [axiosPublic, setCategories]);
+
+
+    useEffect(() => {
+        (
+            async () => {
+                try {
+                    setLoading(true);
+                    const res = await axiosPublic.get(`/bills?category=${selectedCategory}`);
+                    if (res.status !== 200) {
+                        throw new Error(res.message);
+                    }
+                    setBills(res.data);
+                } catch (error) {
+                    console.log(error);
+                    setError(error);
+                } finally {
+                    setLoading(false);
+                }
+            }
+        )();
+
+    }, [selectedCategory]);
 
 
     if (loading) return <Loading />;
@@ -91,16 +92,16 @@ const AllBills = () => {
                                     <option value="">All</option>
                                     {
                                         categories ?
-                                        categories.map((category, index) => {
-                                            return (
-                                                <option key={index} value={category}>{category}</option>
-                                            );
-                                        })
-                                        :
-                                        error ?
-                                            <div className="text-center text-red-600 font-semibold">loading category failed wit error:{error.message}</div>
+                                            categories.map((category, index) => {
+                                                return (
+                                                    <option key={index} value={category}>{category}</option>
+                                                );
+                                            })
                                             :
-                                            <div className="text-center text-gray-600 font-semibold">No Bills Found</div>
+                                            error ?
+                                                <div className="text-center text-red-600 font-semibold">loading category failed wit error:{error.message}</div>
+                                                :
+                                                <div className="text-center text-gray-600 font-semibold">No Bills Found</div>
                                     }
                                 </select>
                                 :
