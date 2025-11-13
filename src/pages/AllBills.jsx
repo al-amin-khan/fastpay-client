@@ -30,6 +30,7 @@ const AllBills = () => {
                     setBills(res.data);
                 } catch (error) {
                     console.log(error);
+                    setError(error);
                 } finally {
                     setLoading(false);
                 }
@@ -57,7 +58,7 @@ const AllBills = () => {
             }
         )();
 
-    }, []);
+    }, [axiosPublic, setCategories]);
 
 
     if (loading) return <Loading />;
@@ -78,27 +79,41 @@ const AllBills = () => {
                         <p className="text-gray-600 font-semibold"> Track, manage, and pay all your bills in one place</p>
                     </div>
 
+                    <div className='text-end py-3'>
+                        {
+                            categories.length > 0 ?
+                                <select
+                                    onChange={handleCategoryChange}
+                                    value={selectedCategory}
+                                    className="select"
+                                >
+                                    <option disabled={true} value="">Pick a Category</option>
+                                    <option value="">All</option>
+                                    {
+                                        categories ?
+                                        categories.map((category, index) => {
+                                            return (
+                                                <option key={index} value={category}>{category}</option>
+                                            );
+                                        })
+                                        :
+                                        error ?
+                                            <div className="text-center text-red-600 font-semibold">loading category failed wit error:{error.message}</div>
+                                            :
+                                            <div className="text-center text-gray-600 font-semibold">No Bills Found</div>
+                                    }
+                                </select>
+                                :
+                                error ?
+                                    <div className="text-center text-red-600 font-semibold">{error.message}</div>
+                                    :
+                                    <div className="text-center text-gray-600 font-semibold">No Bills Found</div>
+                        }
+                    </div>
+
                     {
                         bills.length > 0 ?
                             <div>
-                                <div className='text-end py-3'>
-                                    <select
-                                        onChange={handleCategoryChange}
-                                        value={selectedCategory}
-                                        className="select"
-                                    >
-                                        <option disabled={true} value="">Pick a Category</option>
-                                        <option value="">All</option>
-                                        {
-                                            categories.map((category, index) => {
-                                                return (
-                                                    <option key={index} value={category}>{category}</option>
-                                                );
-                                            })
-                                        }
-                                    </select>
-                                </div>
-
                                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                                     {bills.map((bill) => {
                                         return (
