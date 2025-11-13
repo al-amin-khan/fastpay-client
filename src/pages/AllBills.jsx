@@ -13,6 +13,7 @@ const AllBills = () => {
     const axiosPublic = useAxiosPublic();
     const [bills, setBills] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
     const [categories, setCategories] = useState([]);
     const [selectedCategory, setSelectedCategory] = useState('');
 
@@ -49,6 +50,7 @@ const AllBills = () => {
                     setCategories(res.data.categories);
                 } catch (error) {
                     console.log(error);
+                    setError(error);
                 } finally {
                     setLoading(false);
                 }
@@ -76,31 +78,43 @@ const AllBills = () => {
                         <p className="text-gray-600 font-semibold"> Track, manage, and pay all your bills in one place</p>
                     </div>
 
-                    <div className='text-end py-3'>
-                        <select
-                            onChange={handleCategoryChange}
-                            value={selectedCategory}
-                            className="select"
-                        >
-                            <option disabled={true} value="">Pick a Category</option>
-                            <option value="">All</option>
-                            {
-                                categories.map((category, index) => {
-                                    return (
-                                        <option key={index} value={category}>{category}</option>
-                                    );
-                                })
-                            }
-                        </select>
-                    </div>
+                    {
+                        bills.length > 0 ?
+                            <div>
+                                <div className='text-end py-3'>
+                                    <select
+                                        onChange={handleCategoryChange}
+                                        value={selectedCategory}
+                                        className="select"
+                                    >
+                                        <option disabled={true} value="">Pick a Category</option>
+                                        <option value="">All</option>
+                                        {
+                                            categories.map((category, index) => {
+                                                return (
+                                                    <option key={index} value={category}>{category}</option>
+                                                );
+                                            })
+                                        }
+                                    </select>
+                                </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                        {bills.map((bill) => {
-                            return (
-                                <AllBillCard key={bill._id} bill={bill} />
-                            );
-                        })}
-                    </div>
+                                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                                    {bills.map((bill) => {
+                                        return (
+                                            <AllBillCard key={bill._id} bill={bill} />
+                                        );
+                                    })}
+                                </div>
+                            </div>
+
+                            :
+
+                            error ?
+                                <div className="text-center text-red-600 font-semibold">{error.message}</div>
+                                :
+                                <div className="text-center text-gray-600 font-semibold">No Bills Found</div>
+                    }
                 </div>
             </div>
         </div>

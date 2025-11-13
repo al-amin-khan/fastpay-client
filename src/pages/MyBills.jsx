@@ -23,6 +23,7 @@ const MyBills = () => {
     const [myBills, setMyBills] = useState([]);
     const [selectedBill, setSelectedBill] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [refetch, setRefetch] = useState(false);
 
@@ -43,6 +44,7 @@ const MyBills = () => {
                     setMyBills(res.data);
                 } catch (error) {
                     console.log(error);
+                    setError(error);
                 } finally {
                     setLoading(false);
                 }
@@ -205,74 +207,83 @@ const MyBills = () => {
             <div className="text-end">
                 <button className="btn btn-soft mr-4 mt-2" onClick={generateAllBillsPDFReport}>Generate PDF</button>
             </div>
-            <div className="overflow-x-auto w-11/12 mx-auto">
-                <table className="table">
-                    {/* head */}
-                    <thead>
-                        <tr>
-                            <th>Bill</th>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Amount</th>
-                            <th>Address</th>
-                            <th>Phone</th>
-                            <th>Date</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {
-                            myBills.map((bill, index) => (
-                                <tr key={index}>
-                                    <th>
-                                        {index + 1}
-                                    </th>
-                                    <td>
-                                        {bill.username}
-                                    </td>
-                                    <td>
-                                        <div>
-                                            {bill.email}
-                                        </div>
-                                    </td>
-                                    <td>
-                                        BDT {bill.amount}
-                                    </td>
-                                    <td>{bill.address}</td>
-                                    <td>{bill.phone}</td>
-                                    <td> {(new Date(bill.date)).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })} </td>
-                                    <th>
-                                        <button
-                                            onClick={() => handleUpdateModal(bill)}
-                                            disabled={isSubmitting}
-                                            className="btn btn-ghost btn-sm lg:tooltip" data-tip="Edit"
-                                        >
-                                            <SquarePen className=" text-white" color="#009966" size={25} />
-                                        </button>
-                                        <button
-                                            onClick={() => handleDeleteBill(bill._id)}
-                                            className="btn btn-ghost btn-sm lg:tooltip" data-tip="Delete"
-                                        >
-                                            <Trash className="text-white" size={25} color="#FF3333" />
-                                        </button>
-                                    </th>
+            {
+                myBills.length > 0 ?
+
+                    <div className="overflow-x-auto w-11/12 mx-auto">
+                        <table className="table">
+                            {/* head */}
+                            <thead>
+                                <tr>
+                                    <th>Bill</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Amount</th>
+                                    <th>Address</th>
+                                    <th>Phone</th>
+                                    <th>Date</th>
+                                    <th></th>
                                 </tr>
-                            ))
-                        }
-                    </tbody>
-                    <tfoot>
-                        <tr>
-                            <th>Bill Paid: {myBills.length}</th>
-                            <th></th>
-                            <th></th>
-                            <th>Total: BDT {totalBill}</th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                        </tr>
-                    </tfoot>
-                </table>
-            </div>
+                            </thead>
+                            <tbody>
+                                {
+                                    myBills.map((bill, index) => (
+                                        <tr key={index}>
+                                            <th>
+                                                {index + 1}
+                                            </th>
+                                            <td>
+                                                {bill.username}
+                                            </td>
+                                            <td>
+                                                <div>
+                                                    {bill.email}
+                                                </div>
+                                            </td>
+                                            <td>
+                                                BDT {bill.amount}
+                                            </td>
+                                            <td>{bill.address}</td>
+                                            <td>{bill.phone}</td>
+                                            <td> {(new Date(bill.date)).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })} </td>
+                                            <th>
+                                                <button
+                                                    onClick={() => handleUpdateModal(bill)}
+                                                    disabled={isSubmitting}
+                                                    className="btn btn-ghost btn-sm lg:tooltip" data-tip="Edit"
+                                                >
+                                                    <SquarePen className=" text-white" color="#009966" size={25} />
+                                                </button>
+                                                <button
+                                                    onClick={() => handleDeleteBill(bill._id)}
+                                                    className="btn btn-ghost btn-sm lg:tooltip" data-tip="Delete"
+                                                >
+                                                    <Trash className="text-white" size={25} color="#FF3333" />
+                                                </button>
+                                            </th>
+                                        </tr>
+                                    ))
+                                }
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th>Bill Paid: {myBills.length}</th>
+                                    <th></th>
+                                    <th></th>
+                                    <th>Total: BDT {totalBill}</th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                    :
+                    error ?
+                        <div className='text-center text-red-500 text-2xl font-bold'>{error.message}</div>
+                        :
+                        <div className='text-center text-gray-500 text-2xl font-bold'>No Bills Found</div>
+            }
 
 
             {/* update bill modal */}

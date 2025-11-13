@@ -8,6 +8,7 @@ const LatestBills = () => {
     const axiosPublic = useAxiosPublic();
     const [latestBills, setLatestBills] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
     useEffect(() => {
         (
@@ -21,6 +22,8 @@ const LatestBills = () => {
                     setLatestBills(res.data);
                 } catch (error) {
                     console.log(error);
+                    setError(error)
+
                 } finally {
                     setLoading(false);
                 }
@@ -41,13 +44,27 @@ const LatestBills = () => {
                         <p className="text-gray-600 font-semibold">Check out the latest bills</p>
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                        {latestBills.map((bill) => {
-                            return (
-                                <BillCard key={bill._id} bill={bill} />
-                            );
-                        })}
-                    </div>
+                    {
+                        latestBills.length > 0 ?
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                            {
+                                latestBills.map((bill) => {
+                                    return (
+                                        <BillCard key={bill._id} bill={bill} />
+                                    );
+                                })
+                            }
+                        </div> 
+                        :
+                        <div>
+                            {
+                                error ?
+                                <p className="text-red-500 font-semibold">{error.message}</p>
+                                :
+                                <p className="text-gray-600 font-semibold">No latest bills found.</p>
+                            }
+                        </div>
+                    }
                 </div>
             </div>
         </div>
