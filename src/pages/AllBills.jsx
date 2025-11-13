@@ -21,49 +21,75 @@ const AllBills = () => {
 
 
     useEffect(() => {
-        (
-            async () => {
-                try {
-                    setCategoryLoading(true);
-                    setCategoryError(null);
-                    const res = await axiosPublic.get('/bills/category');
-                    if (res.status !== 200) {
-                        throw new Error(res.message);
-                    }
-                    setCategories(res.data.categories);
-                } catch (error) {
-                    console.log(error);
-                    setCategoryError(error);
-                } finally {
+        let isMounted = true;
+
+        (async () => {
+            try {
+                setCategoryLoading(true);
+                setCategoryError("");
+
+                const res = await axiosPublic.get("/bills/category");
+
+                if (!isMounted) return;
+
+                const data = res.data?.categories ?? [];
+                setCategories(data);
+            } catch (error) {
+                console.error("Category fetch error:", error);
+
+                if (!isMounted) return;
+
+                const message =
+                    error?.response?.data?.message ||
+                    error?.message ||
+                    "Failed to load categories";
+                setCategoryError(message);
+            } finally {
+                if (isMounted) {
                     setCategoryLoading(false);
                 }
             }
-        )();
+        })();
 
+        return () => {
+            isMounted = false;
+        };
     }, [axiosPublic]);
 
-
     useEffect(() => {
-        (
-            async () => {
-                try {
-                    setBillsLoading(true);
-                    setBillsError(null);
+        let isMounted = true;
 
-                    const res = await axiosPublic.get(`/bills?category=${selectedCategory}`);
-                    console.log({categoryRes: res.data});
-                    
-                    setBills(res.data);
+        (async () => {
+            try {
+                setBillsLoading(true);
+                setBillsError("");
 
-                } catch (error) {
-                    console.error('Bills fetch error:', error);
-                    setBillsError(error.message || 'Failed to load bills');
-                } finally {
+                const paramsCategory = encodeURIComponent(selectedCategory);
+                const res = await axiosPublic.get(`/bills?category=${paramsCategory}`);
+
+                if (!isMounted) return;
+
+                setBills(res.data ?? []);
+            } catch (error) {
+                console.error("Bills fetch error:", error);
+
+                if (!isMounted) return;
+
+                const message =
+                    error?.response?.data?.message ||
+                    error?.message ||
+                    "Failed to load bills";
+                setBillsError(message);
+            } finally {
+                if (isMounted) {
                     setBillsLoading(false);
                 }
             }
-        )();
+        })();
 
+        return () => {
+            isMounted = false;
+        };
     }, [selectedCategory, axiosPublic]);
 
 
