@@ -74,7 +74,7 @@ const Navbar = () => {
                 </Link>
             </div>
 
-            <div className="navbar-center">
+            <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1 font-semibold">
                     {
                         visibleNavItems.map(item => (

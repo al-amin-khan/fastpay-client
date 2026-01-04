@@ -190,7 +190,7 @@ const Footer = () => {
                                             key={index}
                                             href={social.href}
                                             aria-label={social.label}
-                                            className="w-10 h-10 bg-base-200 rounded-full flex items-center justify-center hover:bg-linear-to-br hover:from-primary hover:to-secondary transition-all transform hover:scale-115 active:scale-100"
+                                            className="w-10 h-10 bg-base-300/30 rounded-full flex items-center justify-center hover:bg-linear-to-br hover:from-primary hover:to-secondary transition-all transform hover:scale-115 active:scale-100"
                                         >
                                             <Icon className="w-5 h-5" />
                                         </a>

@@ -65,7 +65,7 @@ const HeroSlider = () => {
                 speed={1200}
                 modules={[Navigation, Pagination, Keyboard, Autoplay]}
                 autoplay={{ delay: 3000, disableOnInteraction: false, pauseOnMouseEnter: false }}
-                className="mySwiper w-full"
+                className="mySwiper h-[450] md:h-[450px] lg:h-[450px] w-full rounded-lg overflow-hidden"
             >
                 {
                     sliderContents.map((item, index) => (
