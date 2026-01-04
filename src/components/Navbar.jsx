@@ -5,13 +5,16 @@ import toast from 'react-hot-toast';
 import fastPayLogo from '../assets/fastpay.png';
 import { FaRegCircleUser } from 'react-icons/fa6';
 import useTheme from '../hooks/useTheme';
-import { Moon, Sun } from 'lucide-react';
+import { BadgeDollarSign, BookA, Home, MessageCircleCode, Moon, ReceiptText, ReceiptTextIcon, Sun } from 'lucide-react';
 
 const Navbar = () => {
     const navItems = [
-        { id: 1, name: "Home", link: "/", protected: false },
-        { id: 2, name: "Bills", link: "/bills", protected: false },
-        { id: 3, name: "My Pay Bills", link: "/my-bills", protected: true },
+        { id: 1, name: "Home", link: "/", icon: Home, protected: false },
+        { id: 2, name: "Bills", link: "/bills", icon: ReceiptText, protected: false },
+        { id: 6, name: "My Pay Bills", link: "/my-bills", icon: ReceiptTextIcon, protected: true },
+        { id: 3, name: "About", link: "/about", icon: BookA, protected: false },
+        { id: 4, name: "Pricing", link: "/pricing", icon: BadgeDollarSign, protected: false },
+        { id: 5, name: "Support", link: "/support", icon: MessageCircleCode, protected: false },
     ]
 
     const { loading, user, logOut } = useAuth();
@@ -79,7 +82,10 @@ const Navbar = () => {
                                 <NavLink to={item.link}
                                     className={({ isActive }) => isActive ? 'active underline underline-offset-5 decoration-primary decoration-3' : ''}
                                 >
-                                    {item.name}
+                                    <div className='flex justify-center items-center'>
+                                        <item.icon size={18} className='mr-1' />
+                                        {item.name}
+                                    </div>
                                 </NavLink>
                             </li>
                         ))

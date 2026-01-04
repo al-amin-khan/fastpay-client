@@ -10,6 +10,9 @@ import Home from "../pages/Home";
 import BillDetail from "../pages/BillDetail";
 import AllBills from "../pages/AllBills";
 import PageNotFound from "../components/PageNotFound";
+import About from "../pages/About";
+import Pricing from "../pages/Pricing";
+import Support from "../pages/Support";
 
 const router = createBrowserRouter([
     {
@@ -25,6 +28,18 @@ const router = createBrowserRouter([
             {
                 path: "/bills",
                 element: <AllBills />,
+            },
+            {
+                path: "/about",
+                element: <About />,
+            },
+            {
+                path: "/pricing",
+                element: <Pricing />,
+            },
+            {
+                path: "/support",
+                element: <Support />,
             },
             {
                 path: "/bills/:id",
