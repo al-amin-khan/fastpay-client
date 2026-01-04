@@ -8,6 +8,7 @@ import Swal from 'sweetalert2';
 import { Link, useParams } from 'react-router';
 import PageNotFound from '../components/PageNotFound';
 import useHelmet from '../hooks/useHelmet';
+import BillDetailSkeleton from '../components/BillDetailSkeleton ';
 
 const BillDetail = () => {
     const HelmetTags = useHelmet({
@@ -61,7 +62,6 @@ const BillDetail = () => {
             date: new Date(),
         };
 
-        console.log(payload);
 
 
         try {
@@ -69,9 +69,6 @@ const BillDetail = () => {
 
             const res = await axiosPublic.post('/my-bills', payload);
 
-            if (res.status !== 200) {
-                throw new Error(res.message);
-            }
 
             if (res.data.insertedId) {
                 Swal.fire({
@@ -167,7 +164,7 @@ const BillDetail = () => {
         console.log(amount)
     }
 
-    if (loading) return <Loading />;
+    if (loading) return <BillDetailSkeleton />;
 
 
     if (!bill) {

@@ -1,8 +1,9 @@
 import { useEffect } from "react";
 import { useState } from "react";
 import useAxiosPublic from "../hooks/useAxiosPublic";
-import Loading from "./Loading";
 import BillCard from "./BillCard";
+import LatestBillsSkeleton from "./LatestBillsSkeleton";
+
 
 const LatestBills = () => {
     const axiosPublic = useAxiosPublic();
@@ -32,7 +33,7 @@ const LatestBills = () => {
 
     }, [axiosPublic, setLatestBills]);
 
-    if (loading) return <Loading />;
+    if (loading) return <LatestBillsSkeleton count={6}/>;
 
 
     return (
