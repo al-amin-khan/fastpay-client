@@ -252,13 +252,13 @@ const MyBills = () => {
                                                     disabled={isSubmitting}
                                                     className="btn btn-ghost btn-sm lg:tooltip" data-tip="Edit"
                                                 >
-                                                    <SquarePen className=" text-white" color="#009966" size={25} />
+                                                    <SquarePen className="text-success" size={25} />
                                                 </button>
                                                 <button
                                                     onClick={() => handleDeleteBill(bill._id)}
                                                     className="btn btn-ghost btn-sm lg:tooltip" data-tip="Delete"
                                                 >
-                                                    <Trash className="text-white" size={25} color="#FF3333" />
+                                                    <Trash className="text-error" size={25} />
                                                 </button>
                                             </th>
                                         </tr>
@@ -280,41 +280,41 @@ const MyBills = () => {
                     </div>
                     :
                     error ?
-                        <div className='text-center text-red-500 text-2xl font-bold'>{error.message}</div>
+                        <div className='text-center text-error text-2xl font-bold'>{error.message}</div>
                         :
-                        <div className='text-center text-gray-500 text-2xl font-bold'>No Bills Found</div>
+                        <div className='text-center text-base-content/60 text-2xl font-bold'>No Bills Found</div>
             }
 
 
             {/* update bill modal */}
             <dialog ref={billUpdateModalRef} className="modal modal-bottom sm:modal-middle">
                 <div className="modal-box">
-                    <h3 className="font-bold text-lg text-center text-gray-800">Update Bill</h3>
+                    <h3 className="font-bold text-lg text-center text-base-content">Update Bill</h3>
                     <div>
                         <form
                             onSubmit={handleUpdateBill}
                         >
                             <fieldset className="fieldset">
                                 <label className="label">Bill ID</label>
-                                <input type="text" name='billId' className="input w-full text-gray-800" placeholder="Bill ID" value={selectedBill?._id} readOnly disabled />
+                                <input type="text" name='billId' className="input w-full text-base-content" placeholder="Bill ID" value={selectedBill?._id} readOnly disabled />
 
                                 <label className="label">Account Number</label>
-                                <input type="text" name='accountNumber' className="input w-full text-gray-800" placeholder="Account Number" defaultValue={selectedBill?.accountNumber} />
+                                <input type="text" name='accountNumber' className="input w-full text-base-content" placeholder="Account Number" defaultValue={selectedBill?.accountNumber} />
 
                                 <label className="label">Amount</label>
-                                <input type="text" name='amount' className="input w-full text-gray-800" placeholder="Amount" defaultValue={selectedBill?.amount} />
+                                <input type="text" name='amount' className="input w-full text-base-content" placeholder="Amount" defaultValue={selectedBill?.amount} />
 
                                 <label className="label">Billing Month</label>
-                                <input type="text" name='billingMonth' className="input w-full text-gray-800" placeholder="Billing Month" defaultValue={selectedBill?.billingMonth} />
+                                <input type="text" name='billingMonth' className="input w-full text-base-content" placeholder="Billing Month" defaultValue={selectedBill?.billingMonth} />
 
                                 <label className="label">Username</label>
-                                <input type="text" name='username' className="input w-full text-gray-800" placeholder="Account Number" defaultValue={selectedBill?.username} />
+                                <input type="text" name='username' className="input w-full text-base-content" placeholder="Account Number" defaultValue={selectedBill?.username} />
 
                                 <label className="label">Phone</label>
-                                <input type="text" name='phone' className="input w-full text-gray-800" placeholder="Phone Number" defaultValue={selectedBill?.phone} />
+                                <input type="text" name='phone' className="input w-full text-base-content" placeholder="Phone Number" defaultValue={selectedBill?.phone} />
 
                                 <label className="label">Address</label>
-                                <input type="text" name='address' className="input w-full text-gray-800" placeholder="Address" defaultValue={selectedBill?.address} />
+                                <input type="text" name='address' className="input w-full text-base-content" placeholder="Address" defaultValue={selectedBill?.address} />
 
                                 {
                                     isSubmitting ?

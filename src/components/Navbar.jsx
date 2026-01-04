@@ -57,7 +57,7 @@ const Navbar = () => {
                             visibleNavItems.map(item => (
                                 <li key={item.id}>
                                     <NavLink to={item.link}
-                                        className={({ isActive }) => isActive ? 'active underline underline-offset-5 decoration-[#618de2] decoration-3' : ''}
+                                        className={({ isActive }) => isActive ? 'active underline underline-offset-5 decoration-primary decoration-3' : ''}
                                     >
                                         {item.name}
                                     </NavLink>
@@ -77,7 +77,7 @@ const Navbar = () => {
                         visibleNavItems.map(item => (
                             <li key={item.id}>
                                 <NavLink to={item.link}
-                                    className={({ isActive }) => isActive ? 'active underline underline-offset-5 decoration-[#618de2] decoration-3' : ''}
+                                    className={({ isActive }) => isActive ? 'active underline underline-offset-5 decoration-primary decoration-3' : ''}
                                 >
                                     {item.name}
                                 </NavLink>
@@ -87,7 +87,7 @@ const Navbar = () => {
                 </ul>
             </div>
             <div className="navbar-end hidden lg:flex">
-                <div className='flex items-center justify-center space-x-1.5 text-gray-500'>
+                <div className='flex items-center justify-center space-x-1.5 text-base-content/70'>
                     {
                         user ?
                             (
@@ -133,9 +133,9 @@ const Navbar = () => {
                     <button
                         aria-label="Toggle theme"
                         onClick={toggle}
-                        className={`btn btn-ghost btn-sm ${theme === "light" ? "text-gray-600" : "bg-gray-800"}`}
+                        className={`btn btn-ghost btn-sm ${theme === "light" ? "text-base-content/70" : "bg-base-200 text-base-content"}`}
                     >
-                        {theme === "light" ? <Sun size={22} className="text-amber-600" /> : <Moon size={22} className="text-yellow-400" />}
+                        {theme === "light" ? <Sun size={22} className="text-warning" /> : <Moon size={22} className="text-warning/80" />}
                         <span className="ml-1 hidden sm:inline">
                             {theme === "light" ? "Light" : "Dark"}
                         </span>

@@ -150,7 +150,7 @@ const Register = () => {
                 <div className="hero-content w-full md:w-3/4 lg:w-3/4">
                     <div className="card bg-base-100 w-full max-w-sm shadow-2xl">
                         <div className="card-body">
-                            <p className='text-center font-semibold text-3xl text-gray-800'>Sign Up</p>
+                            <p className='text-center font-semibold text-3xl text-base-content'>Sign Up</p>
                             <form onSubmit={handleRegisterWithEmailAndPassword}>
                                 <fieldset className="fieldset">
                                     <label className="label">Name</label>
@@ -158,7 +158,7 @@ const Register = () => {
                                     <div>
                                         <div className='flex flex-row justify-between'>
                                             <label className="label">Email</label>
-                                            <p className="label-confirm-password w-1/2 text-end text-red-300">Mandatory</p>
+                                            <p className="label-confirm-password w-1/2 text-end text-error/70">Mandatory</p>
                                         </div>
                                         <input type="email" name='email' className="input w-full" placeholder="Email" required />
                                     </div>
@@ -166,7 +166,7 @@ const Register = () => {
                                     <div>
                                         <div className='flex flex-row justify-between'>
                                             <label className="label">Password</label>
-                                            <p className="label-confirm-password w-1/2 text-end text-red-300">Mandatory</p>
+                                            <p className="label-confirm-password w-1/2 text-end text-error/70">Mandatory</p>
                                         </div>
                                         <label className="input w-full">
                                             <input type={showPassword ? 'text' : 'password'} name='password' className="grow w-full" placeholder="Password" required />
@@ -181,7 +181,7 @@ const Register = () => {
                                     <div>
                                         <div className='flex flex-row justify-between'>
                                             <label className="label-confirm-password w-1/2">Confirm Password</label>
-                                            <p className="label-confirm-password w-1/2 text-end text-red-300">Mandatory</p>
+                                            <p className="label-confirm-password w-1/2 text-end text-error/70">Mandatory</p>
                                         </div>
                                         <input type="password" name='confirmPassword' className="input w-full" placeholder="Confirm Password" required />
                                     </div>
@@ -193,7 +193,7 @@ const Register = () => {
                                         <div></div>
                                         <Link to="/auth/login" className="link link-hover text-end">Already have an account?</Link>
                                     </div>
-                                    <button className={`btn mt-4 ${isSubmitting ? 'bg-gray-400 text-white cursor-not-allowed' : 'btn-neutral'}`} disabled={isSubmitting}>Submit</button>
+                                    <button className={`btn mt-4 ${isSubmitting ? 'bg-neutral/40 text-neutral-content cursor-not-allowed' : 'btn-neutral'}`} disabled={isSubmitting}>Submit</button>
                                 </fieldset>
                             </form>
                             <button onClick={() => handleSocialLogin('google')} className="btn btn-soft mt-4">

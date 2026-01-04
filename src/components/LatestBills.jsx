@@ -38,11 +38,11 @@ const LatestBills = () => {
 
     return (
         <div>
-            <div className="min-h-screen bg-gray-50 p-8">
+            <div className="min-h-screen bg-base-200 p-8">
                 <div className="max-w-7xl w-11/12 mx-auto">
                     <div className="mb-8 text-center">
-                        <h1 className="text-3xl font-bold text-gray-900 mb-2">Latest Bills</h1>
-                        <p className="text-gray-600 font-semibold">Check out the latest bills</p>
+                        <h1 className="text-3xl font-bold text-base-content mb-2">Latest Bills</h1>
+                        <p className="text-base-content/70 font-semibold">Check out the latest bills</p>
                     </div>
 
                     {
@@ -60,9 +60,9 @@ const LatestBills = () => {
                         <div>
                             {
                                 error ?
-                                <p className="text-red-500 font-semibold">{error.message}</p>
+                                <p className="text-error font-semibold">{error.message}</p>
                                 :
-                                <p className="text-gray-600 font-semibold">No latest bills found.</p>
+                                <p className="text-base-content/70 font-semibold">No latest bills found.</p>
                             }
                         </div>
                     }

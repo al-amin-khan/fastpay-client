@@ -2,7 +2,7 @@
 const Loading = () => {
     return (
         <div
-            className="fixed inset-0 z-9999 grid place-items-center backdrop-blur-md bg-base-100/30"
+            className="fixed inset-0 grid place-items-center backdrop-blur-md bg-base-100/30"
             role="status"
             aria-live="polite"
         >

@@ -79,12 +79,12 @@ const HeroSlider = () => {
                             <div className="absolute inset-0 z-10 flex items-center justify-center px-4 sm:px-6 lg:px-8">
                                 <div className="text-center">
                                     <Slide direction="right">
-                                        <h1 className="text-white text-4xl sm:text-6xl font-bold leading-tight tracking-tight [text-shadow:0_2px_6px_rgba(0,0,0,0.5)]">
+                                        <h1 className="text-neutral-content text-4xl sm:text-6xl font-bold leading-tight tracking-tight [text-shadow:0_2px_6px_rgba(0,0,0,0.5)]">
                                             {item.title}
                                         </h1>
                                     </Slide>
                                     <Fade delay={500} duration={2000} fraction={0.8} triggerOnce >
-                                        <p className="mt-4 sm:mt-6 text-white text-lg sm:text-xl leading-relaxed [text-shadow:0_1px_3px_rgba(0,0,0,0.45)]">
+                                        <p className="mt-4 sm:mt-6 text-neutral-content text-lg sm:text-xl leading-relaxed [text-shadow:0_1px_3px_rgba(0,0,0,0.45)]">
                                             {item.subtitle}
                                         </p>
                                     </Fade>

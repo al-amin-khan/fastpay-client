@@ -126,7 +126,7 @@ const Login = () => {
                 <div className="hero-content w-full md:w-3/4 lg:w-3/4">
                     <div className="card bg-base-100 w-full max-w-sm shadow-2xl">
                         <div className="card-body">
-                            <div className='text-center text-3xl font-bold text-gray-800'>Login</div>
+                            <div className='text-center text-3xl font-bold text-base-content'>Login</div>
                             <form onSubmit={handleLoginWithEmailAndPassword}>
                                 <fieldset className="fieldset">
                                     <label className="label">Email</label>
@@ -151,7 +151,7 @@ const Login = () => {
                                         </button>
                                         <Link to="/auth/register" className="link link-hover text-end">New to this site?</Link>
                                     </div>
-                                    <button className={`btn mt-4 ${isSubmitting ? 'bg-gray-400 text-white cursor-not-allowed' : 'btn-neutral'}`} disabled={isSubmitting}>Login</button>
+                                    <button className={`btn mt-4 ${isSubmitting ? 'bg-neutral/40 text-neutral-content cursor-not-allowed' : 'btn-neutral'}`} disabled={isSubmitting}>Login</button>
                                 </fieldset>
                             </form>
                             <button onClick={() => handleSocialLogin('google')} className="btn btn-soft mt-4">
