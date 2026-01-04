@@ -119,7 +119,7 @@ const AllBills = () => {
     return (
         <div>
             <HelmetTags />
-            <div className="min-h-screen bg-base-200 p-8">
+            <div className="min-h-screen bg-base-100 p-8">
                 <div className="max-w-7xl w-11/12 mx-auto">
                     <div className="mb-8 text-center">
                         <h1 className="text-3xl font-bold text-base-content mb-2">All Bills In One Place</h1>

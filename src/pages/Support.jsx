@@ -32,7 +32,7 @@ const Support = () => {
     return (
         <>
             <HelmetTags />
-            <div className="min-h-screen bg-base-200">
+            <div className="min-h-screen bg-base-100">
                 <div className="w-11/12 max-w-6xl mx-auto py-10 lg:py-14">
                     <header className="text-center">
                         <p className="text-sm uppercase tracking-[0.2em] text-primary font-semibold">

@@ -30,9 +30,9 @@ const About = () => {
     return (
         <>
             <HelmetTags />
-            <div className="min-h-screen bg-base-200">
+            <div className="min-h-screen bg-base-100">
                 <div className="w-11/12 max-w-6xl mx-auto py-10 lg:py-14">
-                    <section className="bg-base-100 rounded-3xl shadow-lg p-8 lg:p-12">
+                    <section className="bg-base-100 border border-base-200 rounded-3xl shadow-lg p-8 lg:p-12">
                         <p className="text-sm uppercase tracking-[0.2em] text-primary font-semibold">
                             About FastPay
                         </p>
