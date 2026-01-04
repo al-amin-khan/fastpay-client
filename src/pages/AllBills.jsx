@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import useAxiosPublic from '../hooks/useAxiosPublic';
-import Loading from '../components/Loading';
 import AllBillCard from '../components/AllBillCard';
 import useHelmet from '../hooks/useHelmet';
 import BillCardSkeleton from '../components/BillCardSkeleton';
@@ -94,7 +93,6 @@ const AllBills = () => {
     }, [selectedCategory, axiosPublic]);
 
 
-    // if (categoryLoading) return <Loading />;
 
     if (billsLoading) return (
         <div className="w-10/12 mx-auto py-8">
@@ -102,7 +100,7 @@ const AllBills = () => {
                 <h1 className="text-3xl font-bold text-gray-900 mb-2">All Bills In One Place</h1>
                 <p className="text-gray-600 font-semibold"> Track, manage, and pay all your bills in one place</p>
             </div>
-            
+
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {
                     Array.from({ length: 12 }).map((_, i) => (

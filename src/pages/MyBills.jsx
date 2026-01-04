@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import useAuth from "../hooks/useAuth";
 import useAxiosPublic from "../hooks/useAxiosPublic";
-import Loading from "../components/Loading";
 import { SquarePen, Trash } from "lucide-react";
 import { Link } from "react-router";
 import Swal from "sweetalert2";
@@ -9,6 +8,7 @@ import jsPDF from "jspdf";
 import { autoTable } from 'jspdf-autotable';
 import { format } from "date-fns";
 import useHelmet from "../hooks/useHelmet";
+import BillsTableSkeleton from "../components/BillsTableSkeleton";
 
 const MyBills = () => {
 
@@ -52,7 +52,7 @@ const MyBills = () => {
         )();
     }, [refetch, userEmail, axiosPublic]);
 
-    if (loading) return <Loading />;
+    if (loading) return <BillsTableSkeleton />;
 
     if (!userEmail) {
         return (
