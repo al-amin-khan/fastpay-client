@@ -98,10 +98,9 @@ const Navbar = () => {
                         user ?
                             (
                                 <>
-                                    <div className="font-normal">Welcome, {user.displayName}</div>
-                                    <div className="space-x-1.5">
+                                    <div className="dropdown dropdown-end">
                                         <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
-                                            <div className="w-10 rounded-full">
+                                            <div className="w-12 rounded-full border-2 border-[#3fa743]">
                                                 {
                                                     user && user.photoURL ?
                                                         <img
@@ -117,8 +116,23 @@ const Navbar = () => {
                                                 }
                                             </div>
                                         </div>
+                                        <ul
+                                            tabIndex={0}
+                                            className="menu menu-sm dropdown-content mt-3 w-56 rounded-box bg-base-100 p-2 shadow"
+                                        >
+                                            <li className="px-2 py-1 text-sm text-base-content/70">
+                                                Welcome,
+                                                <p className="px-0 font-medium text-base-content">{user.displayName}</p>
+                                            </li>
+                                            <li>
+                                                <div className='flex justify-center items-center'>
+                                                    <button onClick={handleLogOut} className="btn btn-soft btn-sm py-3">
+                                                        Logout
+                                                    </button>
+                                                </div>
+                                            </li>
+                                        </ul>
                                     </div>
-                                    <button onClick={handleLogOut} className="btn btn-soft">Logout</button>
                                 </>
                             )
                             :
