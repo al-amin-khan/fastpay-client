@@ -122,7 +122,7 @@ const Login = () => {
     return (
         <>
             <HelmetTags />
-            <div className="hero bg-base-200 min-h-[90vh]">
+            <div className="hero bg-base-100 min-h-[90vh]">
                 <div className="hero-content w-full md:w-3/4 lg:w-3/4">
                     <div className="card bg-base-100 w-full max-w-sm shadow-2xl">
                         <div className="card-body">

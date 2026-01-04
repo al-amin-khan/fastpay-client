@@ -146,9 +146,9 @@ const Register = () => {
     return (
         <>
             <HelmetTags />
-            <div className="hero bg-base-200 min-h-[90vh]">
+            <div className="hero bg-base-100 min-h-[90vh] pb-8">
                 <div className="hero-content w-full md:w-3/4 lg:w-3/4">
-                    <div className="card bg-base-100 w-full max-w-sm shadow-2xl">
+                    <div className="card bg-base-100 border border-base-300 w-full max-w-sm shadow-2xl">
                         <div className="card-body">
                             <p className='text-center font-semibold text-3xl text-base-content'>Sign Up</p>
                             <form onSubmit={handleRegisterWithEmailAndPassword}>
