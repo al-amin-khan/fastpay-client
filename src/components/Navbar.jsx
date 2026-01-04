@@ -57,7 +57,7 @@ const Navbar = () => {
                             visibleNavItems.map(item => (
                                 <li key={item.id}>
                                     <NavLink to={item.link}
-                                        className={({ isActive }) => isActive ? 'active underline underline-offset-5 decoration-green-600 decoration-2' : ''}
+                                        className={({ isActive }) => isActive ? 'active underline underline-offset-5 decoration-[#618de2] decoration-3' : ''}
                                     >
                                         {item.name}
                                     </NavLink>
@@ -77,7 +77,7 @@ const Navbar = () => {
                         visibleNavItems.map(item => (
                             <li key={item.id}>
                                 <NavLink to={item.link}
-                                    className={({ isActive }) => isActive ? 'active underline underline-offset-5 decoration-green-600 decoration-2' : ''}
+                                    className={({ isActive }) => isActive ? 'active underline underline-offset-5 decoration-[#618de2] decoration-3' : ''}
                                 >
                                     {item.name}
                                 </NavLink>

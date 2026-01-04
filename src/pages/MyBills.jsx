@@ -204,7 +204,7 @@ const MyBills = () => {
     return (
         <div>
             <HelmetTags />
-            <div className="text-end">
+            <div className="text-end w-11/12 mx-auto">
                 <button className="btn btn-soft mr-4 mt-2" onClick={generateAllBillsPDFReport}>Generate PDF</button>
             </div>
             {

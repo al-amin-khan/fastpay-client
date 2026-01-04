@@ -1,7 +1,5 @@
-// BillsTableSkeleton.jsx
-import React from "react";
 
-const BillsTableSkeleton = ({ rows = 3 }) => {
+const BillsTableSkeleton = ({ rows = 5 }) => {
     return (
         <div className="w-10/12 mx-auto py-8">
             <div className="overflow-x-auto rounded-2xl border border-base-200 bg-base-100 shadow-sm">
