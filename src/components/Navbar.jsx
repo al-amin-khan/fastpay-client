@@ -44,7 +44,7 @@ const Navbar = () => {
     };
 
     return (
-        <div className="navbar bg-base-100 shadow-sm font-inter">
+        <div className="w-11/12 mx-auto navbar bg-base-100 shadow-sm font-inter">
             <div className="navbar-start">
                 <div className="dropdown">
                     <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -67,10 +67,11 @@ const Navbar = () => {
                     </ul>
                 </div>
                 <Link to="/" className="btn btn-ghost text-xl">
-                    <img src={fastPayLogo} alt="fastPay Logo" className="ml-1.5 md:ml-0 lg:ml-0 h-10 md:h-12 lg:h-12" />
+                    <img src={fastPayLogo} alt="fastPay Logo" className="ml-1.5 md:ml-0 lg:ml-0 h-10 md:h-10 lg:h-12" />
                 </Link>
             </div>
-            <div className="navbar-end hidden lg:flex">
+
+            <div className="navbar-center">
                 <ul className="menu menu-horizontal px-1 font-semibold">
                     {
                         visibleNavItems.map(item => (
@@ -84,6 +85,8 @@ const Navbar = () => {
                         ))
                     }
                 </ul>
+            </div>
+            <div className="navbar-end hidden lg:flex">
                 <div className='flex items-center justify-center space-x-1.5 text-gray-500'>
                     {
                         user ?

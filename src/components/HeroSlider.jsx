@@ -55,7 +55,7 @@ const HeroSlider = () => {
 
 
     return (
-        <div className='w-full'>
+        <div className='w-11/12 mx-auto'>
             <Swiper
                 navigation={true}
                 pagination={true}

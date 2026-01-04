@@ -5,7 +5,7 @@ import Footer from '../components/Footer';
 const RootLayout = () => {
     return (
         <>
-            <nav>
+            <nav className='py-3'>
                 <Navbar />
             </nav>
             
